@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Restore Timestamps
-        uses: thetradedesk/git-restore-mtime-action@v1
+        uses: thetradedesk/git-restore-mtime-action@v1.2
 
       - name: Package Jar 
         id: package
