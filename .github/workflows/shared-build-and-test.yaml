@@ -31,6 +31,7 @@ jobs:
           exit-code: '0'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
+          hide-progress: true
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -41,6 +42,7 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL'
           output: 'trivy-results.sarif'
+          hide-progress: true
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
