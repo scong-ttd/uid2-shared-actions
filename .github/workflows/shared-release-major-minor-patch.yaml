@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      #- uses: ./.github/workflows/download_gpg_key
-      #  with:
-      #    key: ${{ secrets.GPG_KEY }}
+      - uses: ./.github/workflows/download_gpg_key
+        with:
+          key: ${{ secrets.GPG_KEY }}
 
       - name: Check Version before any work
         uses: ./.github/workflows/check_version
@@ -69,8 +69,7 @@ jobs:
           tag: '${{ steps.check_version.outputs.version }}'
 
       - name: Publish 
-        #run: mvn -B -Drepo.id=ossrh -Drepo.login=uidadmin -Drepo.pwd="${{ secrets.SONATYPE_REPO_PASSWORD }}" -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" clean deploy
-        run: mvn -B clean package
+        run: mvn -B -Drepo.id=ossrh -Drepo.login=uidadmin -Drepo.pwd="${{ secrets.SONATYPE_REPO_PASSWORD }}" -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" clean deploy
 
       - name: 'Bump Version for Major/Minor'
         run: mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT versions:commit
